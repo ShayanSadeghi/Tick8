@@ -1,11 +1,8 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+
+import Card from "./components/card";
+import AddButton from "./components/addButton";
 
 export default function App() {
   return (
@@ -13,10 +10,8 @@ export default function App() {
       <View style={styles.header}>
         <Text>Tick-8</Text>
       </View>
-
-      <TouchableOpacity style={styles.card}>
-        <Text>Hi</Text>
-      </TouchableOpacity>
+      <Card />
+      <AddButton />
     </View>
   );
 }
@@ -36,14 +31,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#FCF9EA",
     alignItems: "center",
     justifyContent: "center",
-  },
-
-  card: {
-    backgroundColor: "#BADFDB",
-    padding: 10,
-    width: "90%",
-    alignItems: "center",
-    borderRadius: 24,
-    height: 70,
   },
 });
