@@ -1,6 +1,15 @@
 import { StyleSheet } from "react-native";
 
 export const GlobalStyles = StyleSheet.create({
+  header: {
+    width: "100%",
+    height: 70,
+    position: "absolute",
+    top: 0,
+    backgroundColor: "#49BEB7",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   card: {
     backgroundColor: "#BADFDB",
     padding: 10,
