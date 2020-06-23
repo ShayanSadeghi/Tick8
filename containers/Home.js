@@ -12,16 +12,16 @@ import AddButton from "../components/addButton";
 
 import { GlobalStyles } from "../styles/global";
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const onCardPressed = () => {
-    navigation.navigate("CardInfo")
+    navigation.navigate("CardInfo");
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      {/*<View style={styles.header}>
         <Text>Tick-8 is here</Text>
-      </View>
+  </View>*/}
       <TouchableOpacity
         style={GlobalStyles.card}
         onPress={() => onCardPressed()}>

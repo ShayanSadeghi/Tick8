@@ -13,6 +13,14 @@ const screens = {
   },
 };
 
-const HomeStack = createStackNavigator(screens);
+const HomeStack = createStackNavigator(screens, {
+  defaultNavigationOptions: {
+    title: "Tick-8",
+    headerTintColor: "#FF8A5C",
+    headerStyle: {
+      backgroundColor: "#49BEB7",
+    },
+  },
+});
 
 export default createAppContainer(HomeStack);
