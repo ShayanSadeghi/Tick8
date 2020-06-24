@@ -9,8 +9,10 @@ import React from "react";
 const screens = {
   Home: {
     screen: Home,
-    navigationOptions: {
-      headerTitle: () => <Header title="Tick-8" />,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: () => <Header title="Tick-8" navigation={navigation} />,
+      };
     },
   },
   CardInfo: {

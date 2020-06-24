@@ -7,8 +7,10 @@ import React from "react";
 const screens = {
   about: {
     screen: About,
-    navigationOptions: {
-      headerTitle: () => <Header title="About" />,
+    navigationOptions: ({ navigation }) => {
+      return {
+        headerTitle: () => <Header title="About" navigation={navigation} />,
+      };
     },
   },
 };
