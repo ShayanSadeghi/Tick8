@@ -17,6 +17,8 @@ const screens = {
   },
 };
 
-const Navigator = createDrawerNavigator(screens);
+const Navigator = createDrawerNavigator(screens, {
+  drawerBackgroundColor: "#FF8A5C",
+});
 
 export default createAppContainer(Navigator);
