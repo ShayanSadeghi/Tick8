@@ -1,6 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export const GlobalStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FCF9EA",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   header: {
     width: "100%",
     height: 70,
@@ -31,5 +37,38 @@ export const GlobalStyles = StyleSheet.create({
   addBtnContent: {
     color: "#FF8A5C",
     alignSelf: "center",
+  },
+  modalContainer: {
+    backgroundColor: "#FCF9EA",
+    alignItems: "center",
+    flex: 1,
+  },
+  inputText: {
+    width: 300,
+    height: 50,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    marginVertical: 30,
+    backgroundColor: "#EFEFEF",
+  },
+  modalButtonClose: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    width: "50%",
+    height: 50,
+    backgroundColor: "#FF8A5C",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalButtonAdd: {
+    position: "absolute",
+    bottom: 0,
+    right: 0,
+    width: "50%",
+    height: 50,
+    backgroundColor: "#49BEB7",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
