@@ -19,9 +19,6 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/*<View style={styles.header}>
-        <Text>Tick-8 is here</Text>
-  </View>*/}
       <TouchableOpacity
         style={GlobalStyles.card}
         onPress={() => onCardPressed()}>
@@ -33,15 +30,6 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    width: "100%",
-    height: 70,
-    position: "absolute",
-    top: 0,
-    backgroundColor: "#49BEB7",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   container: {
     flex: 1,
     backgroundColor: "#FCF9EA",

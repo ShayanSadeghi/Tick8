@@ -1,12 +1,28 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
-import { GlobalStyles } from "../styles/global";
-
-export default function Header() {
+const Header = ({ title }) => {
   return (
-    <View style={GlobalStyles.header}>
-      <Text>Tick-8</Text>
+    <View style={styles.header}>
+      <Text style={styles.headerText}>{title}</Text>
     </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  header: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+  },
+  headerText: {
+    fontWeight: "bold",
+    fontSize: 20,
+    color: "#FF8A5C",
+    padding: 10,
+  },
+});
+
+export default Header;
