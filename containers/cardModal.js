@@ -6,6 +6,7 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Keyboard,
+  AsyncStorage,
 } from "react-native";
 
 import { GlobalStyles } from "../styles/global";
@@ -14,20 +15,15 @@ import CardForm from "../components/cardForm";
 
 export default function CardModal({ visible, setModalOpen }) {
   const addCard = values => {
-    console.log("Added");
+    console.log(values);
+    console.log("Add");
     setModalOpen(false);
   };
   return (
     <Modal visible={visible} animationType="slide">
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={GlobalStyles.modalContainer}>
-          <CardForm addCard={addCard} />
-          <TouchableOpacity style={GlobalStyles.modalButtonClose}>
-            <Text onPress={() => setModalOpen(false)}>Close</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={GlobalStyles.modalButtonAdd}>
-            <Text onPress={addCard}>Add</Text>
-          </TouchableOpacity>
+          <CardForm addCard={addCard} setModalOpen={setModalOpen} />
         </View>
       </TouchableWithoutFeedback>
     </Modal>

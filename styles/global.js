@@ -51,22 +51,20 @@ export const GlobalStyles = StyleSheet.create({
     marginVertical: 30,
     backgroundColor: "#EFEFEF",
   },
-  modalButtonClose: {
-    position: "absolute",
+  modalButtons: {
     bottom: 0,
-    left: 0,
-    width: "50%",
+    flex: 1,
+    flexDirection: "row",
     height: 50,
+  },
+  modalButtonClose: {
+    width: "50%",
     backgroundColor: "#FF8A5C",
     justifyContent: "center",
     alignItems: "center",
   },
   modalButtonAdd: {
-    position: "absolute",
-    bottom: 0,
-    right: 0,
     width: "50%",
-    height: 50,
     backgroundColor: "#49BEB7",
     justifyContent: "center",
     alignItems: "center",
