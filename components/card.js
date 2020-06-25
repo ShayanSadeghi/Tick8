@@ -1,8 +1,51 @@
-import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 
-import { GlobalStyles } from "../styles/global";
-
-export default function Card() {
-  return <Text>Hi</Text>;
+export default function Card({ data }) {
+  console.log("In Props", data);
+  return (
+    <View style={styles.cardContainer}>
+      <View style={styles.questionContainer}>
+        <Text style={styles.questionText}>{data.cardQ}</Text>
+      </View>
+      <View style={styles.cardIcons}>
+        <TouchableOpacity>
+          <AntDesign
+            style={styles.icon}
+            name="closecircleo"
+            size={30}
+            color="#FF8A5C"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <AntDesign
+            style={styles.icon}
+            name="checkcircleo"
+            size={30}
+            color="#FF8A5C"
+          />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
+
+const styles = StyleSheet.create({
+  questionContainer: {
+    width: 300,
+    minHeight: 30,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  questionText: {},
+  cardIcons: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: 5,
+  },
+  icon: {
+    marginHorizontal: 50,
+  },
+});

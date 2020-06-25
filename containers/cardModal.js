@@ -18,7 +18,7 @@ export default function CardModal({ visible, setModalOpen }) {
     ],
     true,
     (tx, res) => {
-      console.log(res);
+      // console.log(res);
     }
   );
   const addCard = values => {
@@ -31,27 +31,11 @@ export default function CardModal({ visible, setModalOpen }) {
       ],
       false,
       (tx, res) => {
-        console.log("RES: ", res);
+        // console.log("RES: ", res);
       }
     );
-    // db.transaction(tx => {
-    //   tx.executeSql(
-    //     "INSERT INTO tblUserCards (question,answer,example) VALUES (?,?,?)",
-    //     [values.question, values.answer, values.example],
-    //     (tx, results) => {
-    //       console.log("RESULTS: ", results.rowsAffected);
-    //       if (results.rowsAffected > 0) {
-    //         console.log("successfully added");
-    //       } else {
-    //         console.log("an error exist");
-    //       }
-    //     }
-    //   );
-    // });
     console.log(values.question);
-    // console.log("Add");
-
-    // setModalOpen(false);
+    setModalOpen(false);
   };
   return (
     <Modal visible={visible} animationType="slide">

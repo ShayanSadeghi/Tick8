@@ -15,35 +15,22 @@ export default function App() {
     ],
     false,
     (tx, res) => {
-      console.log("Db count:", res[0].rows.length);
+      // console.log("Db count:", res[0].rows.length);
       if (res[0].rows.length === 0) {
         db.exec(
           [
             {
               sql:
-                "CREATE TABLE tblUserCards(card_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cardQ VARCHAR(20), cardA VARCHAR(40),cardEx VARCHAR(255) )",
+                "CREATE TABLE tblUserCards(key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cardQ VARCHAR(20), cardA VARCHAR(40),cardEx VARCHAR(255) )",
               args: [],
             },
           ],
           false,
           (tx, res) => {
-            console.log(res);
+            // console.log(res);
           }
         );
       }
-    }
-  );
-
-  db.exec(
-    [
-      {
-        sql: "select * from tblUserCards",
-        args: [],
-      },
-    ],
-    false,
-    (tx, res) => {
-      console.log(res);
     }
   );
 

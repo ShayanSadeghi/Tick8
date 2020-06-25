@@ -19,10 +19,12 @@ export const GlobalStyles = StyleSheet.create({
   card: {
     backgroundColor: "#BADFDB",
     padding: 10,
-    width: "90%",
+    marginTop: 30,
+    width: "100%",
     alignItems: "center",
+    alignSelf: "center",
     borderRadius: 24,
-    height: 70,
+    minHeight: 70,
   },
   addBtn: {
     backgroundColor: "#49BEB7",
