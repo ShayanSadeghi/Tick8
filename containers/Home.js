@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
 import * as SQLite from "expo-sqlite";
 
 import Card from "../components/card";
@@ -33,6 +27,34 @@ export default function Home({ navigation }) {
     setModalOpen(true);
   };
 
+  const addCard = values => {
+    db.exec(
+      [
+        {
+          sql: "INSERT INTO tblUserCards (cardQ,cardA,cardEx) VALUES (?,?,?)",
+          args: [values.question, values.answer, values.example],
+        },
+      ],
+      false,
+      (tx, res) => {
+        db.exec(
+          [
+            {
+              sql: "select * from tblUserCards",
+              args: [],
+            },
+          ],
+          true,
+          (tx, res) => {
+            setCards(res[0].rows);
+            console.log("IN TABLE:", res[0].rows);
+          }
+        );
+      }
+    );
+    setModalOpen(false);
+  };
+
   useEffect(() => {
     db.exec(
       [
@@ -51,7 +73,11 @@ export default function Home({ navigation }) {
 
   return (
     <View style={GlobalStyles.container}>
-      <CardModal visible={modalOpen} setModalOpen={setModalOpen} />
+      <CardModal
+        visible={modalOpen}
+        setModalOpen={setModalOpen}
+        addCard={addCard}
+      />
 
       <FlatList
         data={cards}
