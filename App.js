@@ -21,13 +21,13 @@ export default function App() {
           [
             {
               sql:
-                "CREATE TABLE tblUserCards(key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cardQ VARCHAR(20), cardA VARCHAR(40),cardEx VARCHAR(255) )",
+                "CREATE TABLE tblUserCards(key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cardQ VARCHAR(20), cardA VARCHAR(40),cardEx VARCHAR(255), remainDays INTEGER)",
               args: [],
             },
           ],
           false,
           (tx, res) => {
-            // console.log(res);
+            console.log(res);
           }
         );
       }

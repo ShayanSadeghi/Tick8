@@ -31,8 +31,9 @@ export default function Home({ navigation }) {
     db.exec(
       [
         {
-          sql: "INSERT INTO tblUserCards (cardQ,cardA,cardEx) VALUES (?,?,?)",
-          args: [values.question, values.answer, values.example],
+          sql:
+            "INSERT INTO tblUserCards (cardQ,cardA,cardEx,remainDays) VALUES (?,?,?,?)",
+          args: [values.question, values.answer, values.example, 8],
         },
       ],
       false,
