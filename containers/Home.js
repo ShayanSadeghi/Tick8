@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList, TouchableOpacity } from "react-native";
 import * as SQLite from "expo-sqlite";
 
 import Card from "../components/card";
 import AddButton from "../components/addButton";
 import CardModal from "../containers/cardModal";
+import { DbSetNewCard, DbUpdateCard } from "../actions/dbActions";
 
 import { GlobalStyles } from "../styles/global";
 
@@ -12,89 +13,16 @@ export default function Home({ navigation }) {
   const db = SQLite.openDatabase("UserDatabase");
   const [cards, setCards] = useState([
     {
-      key: 1,
+      key: 0,
       cardQ: "Hello and Welcome",
       cardA: "",
       cardEx: "",
+      remainDays: 4,
     },
   ]);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const onCardPressed = item => {
-    navigation.navigate("CardInfo", item);
-  };
-
-  const openNewForm = () => {
-    setModalOpen(true);
-  };
-  const addCard = values => {
-    db.exec(
-      [
-        {
-          sql:
-            "INSERT INTO tblUserCards (cardQ,cardA,cardEx,remainDays) VALUES (?,?,?,?)",
-          args: [values.question, values.answer, values.example, 8],
-        },
-      ],
-      false,
-      (tx, res) => {
-        db.exec(
-          [
-            {
-              sql: "select * from tblUserCards",
-              args: [],
-            },
-          ],
-          true,
-          (tx, res) => {
-            setCards(res[0].rows);
-            console.log("IN TABLE:", res[0].rows);
-          }
-        );
-      }
-    );
-    setModalOpen(false);
-  };
-  const answerHandler = (ans, item) => {
-    if (ans) {
-      db.exec(
-        [
-          {
-            sql: "UPDATE tblUserCards SET remainDays=(?) WHERE key=(?)",
-            args: [item.remainDays - 1, item.key],
-          },
-          {
-            sql: "select * from tblUserCards",
-            args: [],
-          },
-        ],
-        false,
-        (tx, res) => {
-          setCards(res[1].rows);
-          console.log(res);
-        }
-      );
-    } else {
-      db.exec(
-        [
-          {
-            sql: "UPDATE tblUserCards SET remainDays=(?) WHERE key=(?)",
-            args: [item.remainDays + 1, item.key],
-          },
-          {
-            sql: "select * from tblUserCards",
-            args: [],
-          },
-        ],
-        false,
-        (tx, res) => {
-          setCards(res[1].rows);
-          console.log(res);
-        }
-      );
-    }
-  };
-  useEffect(() => {
+  const getData = () => {
     db.exec(
       [
         {
@@ -104,9 +32,32 @@ export default function Home({ navigation }) {
       ],
       true,
       (tx, res) => {
-        setCards(res[0].rows);
+        res[0].rows.length !== 0 && setCards(res[0].rows);
       }
     );
+  };
+
+  const onCardPressed = item => {
+    navigation.navigate("CardInfo", item);
+  };
+
+  const openNewForm = () => {
+    setModalOpen(true);
+  };
+
+  const addCard = values => {
+    DbSetNewCard(values);
+    getData();
+    setModalOpen(false);
+  };
+
+  const answerHandler = (ans, item) => {
+    DbUpdateCard(ans, item);
+    getData();
+  };
+
+  useEffect(() => {
+    getData();
   }, []);
 
   return (
@@ -119,6 +70,7 @@ export default function Home({ navigation }) {
 
       <FlatList
         data={cards}
+        keyExtractor={item => item.key.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
             style={GlobalStyles.card}
@@ -132,10 +84,3 @@ export default function Home({ navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  listContainer: {
-    alignSelf: "center",
-    backgroundColor: "red",
-  },
-});

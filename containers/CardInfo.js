@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import * as Progress from "react-native-progress";
 
-import { GlobalStyles } from "../styles/global";
 
 export default function CardInfo({ navigation }) {
   const itemData = navigation.state.params;

@@ -1,25 +1,14 @@
 import React from "react";
 import { View } from "react-native";
-import * as SQLite from "expo-sqlite";
 
 import Tick8Button from "../shared/tick8Button";
 import { GlobalStyles } from "../styles/global";
 
+import { DbDropTable } from "../actions/dbActions";
+
 export default function Settings({ navigation }) {
-  const db = SQLite.openDatabase("UserDatabase");
   const deleteHandler = () => {
-    db.exec(
-      [
-        {
-          sql: "DROP TABLE tblUserCards",
-          args: [],
-        },
-      ],
-      false,
-      (tx, res) => {
-        console.log(res);
-      }
-    );
+    DbDropTable();
   };
 
   return (
