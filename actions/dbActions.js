@@ -78,7 +78,7 @@ export const DbDropTable = () => {
   db.exec(
     [
       {
-        sql: "DROP TABLE tblUserCards",
+        sql: "DELETE FROM tblUserCards",
         args: [],
       },
     ],
