@@ -1,25 +1,34 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { View } from "react-native";
+import * as SQLite from "expo-sqlite";
 
+import Tick8Button from "../shared/tick8Button";
 import { GlobalStyles } from "../styles/global";
 
 export default function Settings({ navigation }) {
-  const onCardPressed = () => {
-    navigation.navigate("CardInfo");
+  const db = SQLite.openDatabase("UserDatabase");
+  const deleteHandler = () => {
+    db.exec(
+      [
+        {
+          sql: "DROP TABLE tblUserCards",
+          args: [],
+        },
+      ],
+      false,
+      (tx, res) => {
+        console.log(res);
+      }
+    );
   };
 
   return (
-    <View style={styles.container}>
-      <Text>Settings page</Text>
+    <View style={GlobalStyles.container}>
+      <Tick8Button
+        text="Delete All Cards"
+        pressHandler={deleteHandler}
+        icon="delete"
+      />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FCF9EA",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
