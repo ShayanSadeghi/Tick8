@@ -1,14 +1,19 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 
 import Tick8Button from "../shared/tick8Button";
 import { GlobalStyles } from "../styles/global";
 
-import { DbDropTable } from "../actions/dbActions";
+import { DbRemoveData } from "../actions/dbActions";
 
 export default function Settings({ navigation }) {
   const deleteHandler = () => {
-    DbDropTable();
+    Alert.alert(
+      "DELETE CARDS",
+      "Are you sure to remove all of your cards history?",
+      [{ text: "Yes", onPress: () => DbRemoveData() }, { text: "Cancel" }],
+      { cancelable: true }
+    );
   };
 
   return (

@@ -74,7 +74,7 @@ export const DbUpdateCard = (ans, item) => {
 };
 
 //Delete Table
-export const DbDropTable = () => {
+export const DbRemoveData = () => {
   db.exec(
     [
       {
