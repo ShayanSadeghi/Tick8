@@ -29,7 +29,6 @@ export default function Home({ navigation }) {
   const [loading, setLoading] = useState(true);
 
   const getData = () => {
-    setLoading(true);
     db.exec(
       [
         {
@@ -56,6 +55,7 @@ export default function Home({ navigation }) {
 
   const addCard = values => {
     DbSetNewCard(values);
+    setLoading(true);
     getData();
     setModalOpen(false);
   };
