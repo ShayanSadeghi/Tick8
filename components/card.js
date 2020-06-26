@@ -3,7 +3,6 @@ import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function Card({ data, answerHandler }) {
-  console.log("DATA:", data);
   return (
     <View style={styles.cardContainer}>
       <View style={styles.questionContainer}>

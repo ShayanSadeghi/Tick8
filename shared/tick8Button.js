@@ -21,7 +21,7 @@ export default function Tick8Button({ text, pressHandler, icon }) {
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
-    backgroundColor: "pink",
+    backgroundColor: "#FF8A5C",
     width: 300,
     height: 50,
     justifyContent: "center",

@@ -11,7 +11,6 @@ import * as Progress from "react-native-progress";
 
 export default function CardInfo({ navigation }) {
   const itemData = navigation.state.params;
-  console.log("remain:", itemData.remainDays);
   const progressLength = (8 - itemData.remainDays) / 10;
   const [answerText, setAnswerText] = useState("Press to show the answer");
   return (

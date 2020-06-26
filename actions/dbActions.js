@@ -24,9 +24,7 @@ export const DbCreate = () => {
             },
           ],
           false,
-          (tx, res) => {
-            console.log(res);
-          }
+          (tx, res) => {}
         );
       }
     }
@@ -44,9 +42,7 @@ export const DbSetNewCard = values => {
       },
     ],
     false,
-    (tx, res) => {
-      console.log("card added");
-    }
+    (tx, res) => {}
   );
 };
 
@@ -59,16 +55,9 @@ export const DbUpdateCard = (ans, item) => {
           sql: "UPDATE tblUserCards SET remainDays=(?) WHERE key=(?)",
           args: [item.remainDays - 1, item.key],
         },
-        {
-          sql: "select * from tblUserCards",
-          args: [],
-        },
       ],
       false,
-      (tx, res) => {
-        setCards(res[1].rows);
-        console.log(res);
-      }
+      (tx, res) => {}
     );
   } else {
     db.exec(
@@ -79,9 +68,7 @@ export const DbUpdateCard = (ans, item) => {
         },
       ],
       false,
-      (tx, res) => {
-        getData();
-      }
+      (tx, res) => {}
     );
   }
 };
@@ -96,9 +83,7 @@ export const DbDropTable = () => {
       },
     ],
     false,
-    (tx, res) => {
-      console.log(res);
-    }
+    (tx, res) => {}
   );
 };
 // Get all cards data from database ....
