@@ -27,7 +27,6 @@ export default function Home({ navigation }) {
   const openNewForm = () => {
     setModalOpen(true);
   };
-
   const addCard = values => {
     db.exec(
       [
@@ -56,7 +55,45 @@ export default function Home({ navigation }) {
     );
     setModalOpen(false);
   };
-
+  const answerHandler = (ans, item) => {
+    if (ans) {
+      db.exec(
+        [
+          {
+            sql: "UPDATE tblUserCards SET remainDays=(?) WHERE key=(?)",
+            args: [item.remainDays - 1, item.key],
+          },
+          {
+            sql: "select * from tblUserCards",
+            args: [],
+          },
+        ],
+        false,
+        (tx, res) => {
+          setCards(res[1].rows);
+          console.log(res);
+        }
+      );
+    } else {
+      db.exec(
+        [
+          {
+            sql: "UPDATE tblUserCards SET remainDays=(?) WHERE key=(?)",
+            args: [item.remainDays + 1, item.key],
+          },
+          {
+            sql: "select * from tblUserCards",
+            args: [],
+          },
+        ],
+        false,
+        (tx, res) => {
+          setCards(res[1].rows);
+          console.log(res);
+        }
+      );
+    }
+  };
   useEffect(() => {
     db.exec(
       [
@@ -68,7 +105,6 @@ export default function Home({ navigation }) {
       true,
       (tx, res) => {
         setCards(res[0].rows);
-        console.log("IN TABLE:", res[0].rows);
       }
     );
   }, []);
@@ -87,7 +123,7 @@ export default function Home({ navigation }) {
           <TouchableOpacity
             style={GlobalStyles.card}
             onPress={() => onCardPressed(item)}>
-            <Card data={item} />
+            <Card data={item} answerHandler={answerHandler} />
           </TouchableOpacity>
         )}
       />

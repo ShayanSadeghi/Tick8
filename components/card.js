@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function Card({ data }) {
+export default function Card({ data, answerHandler }) {
+  console.log("DATA:", data);
   return (
     <View style={styles.cardContainer}>
       <View style={styles.questionContainer}>
         <Text style={styles.questionText}>{data.cardQ}</Text>
       </View>
       <View style={styles.cardIcons}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => answerHandler(false, data)}>
           <AntDesign
             style={styles.icon}
             name="closecircleo"
@@ -17,7 +18,7 @@ export default function Card({ data }) {
             color="#FF8A5C"
           />
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => answerHandler(true, data)}>
           <AntDesign
             style={styles.icon}
             name="checkcircleo"
