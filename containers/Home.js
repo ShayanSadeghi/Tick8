@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import {
+  ActivityIndicator,
+  View,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import * as SQLite from "expo-sqlite";
 
 import Card from "../components/card";
@@ -21,6 +27,7 @@ export default function Home({ navigation }) {
     },
   ]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getData = () => {
     db.exec(
@@ -32,7 +39,9 @@ export default function Home({ navigation }) {
       ],
       true,
       (tx, res) => {
-        res[0].rows.length !== 0 && setCards(res[0].rows);
+        (res[0].rows.length !== 0 && setCards(res[0].rows)) ||
+          setLoading(false);
+        setLoading(false);
       }
     );
   };
@@ -60,27 +69,36 @@ export default function Home({ navigation }) {
     getData();
   }, []);
 
+  if (loading) {
+    return (
+      <View style={GlobalStyles.container}>
+        <ActivityIndicator size={50} color="#FF8A5C" />
+      </View>
+    );
+  }
   return (
     <View style={GlobalStyles.container}>
-      <CardModal
-        visible={modalOpen}
-        setModalOpen={setModalOpen}
-        addCard={addCard}
-      />
+      <View style={GlobalStyles.container}>
+        <CardModal
+          visible={modalOpen}
+          setModalOpen={setModalOpen}
+          addCard={addCard}
+        />
 
-      <FlatList
-        data={cards}
-        keyExtractor={item => item.key.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={GlobalStyles.card}
-            onPress={() => onCardPressed(item)}>
-            <Card data={item} answerHandler={answerHandler} />
-          </TouchableOpacity>
-        )}
-      />
+        <FlatList
+          data={cards}
+          keyExtractor={item => item.key.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={GlobalStyles.card}
+              onPress={() => onCardPressed(item)}>
+              <Card data={item} answerHandler={answerHandler} />
+            </TouchableOpacity>
+          )}
+        />
 
-      <AddButton onPress={openNewForm} />
+        <AddButton onPress={openNewForm} />
+      </View>
     </View>
   );
 }
