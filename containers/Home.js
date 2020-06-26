@@ -5,7 +5,6 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
 import * as SQLite from "expo-sqlite";
 
 import Card from "../components/card";
@@ -30,6 +29,7 @@ export default function Home({ navigation }) {
   const [loading, setLoading] = useState(true);
 
   const getData = () => {
+    setLoading(true);
     db.exec(
       [
         {
