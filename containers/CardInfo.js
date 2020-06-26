@@ -10,15 +10,18 @@ import * as Progress from "react-native-progress";
 
 import { GlobalStyles } from "../styles/global";
 
-export default function CardInfo() {
+export default function CardInfo({ navigation }) {
+  const itemData = navigation.state.params;
+  const progressLength = (8 - itemData.remainDays) / 10;
+  const [answerText, setAnswerText] = useState("Press to show the answer");
   return (
     <ScrollView style={styles.infoContainer}>
       <View style={styles.infoCard}>
         <View style={styles.infoTextContainer}>
-          <Text style={styles.infoQuestion}> Card Info</Text>
+          <Text style={styles.infoQuestion}>{itemData.cardQ}</Text>
         </View>
         <Progress.Bar
-          progress={0.8}
+          progress={progressLength}
           width={300}
           color="#FF8A5C"
           unfilledColor="#EAEAEA"
@@ -28,13 +31,12 @@ export default function CardInfo() {
           style={styles.progressBar}
         />
         <View style={styles.infoTextContainer}>
-          <Text style={styles.infoExample}>
-            {" "}
-            Some text for example or description can be here Some text for
-          </Text>
+          <Text style={styles.infoExample}>{itemData.cardEx}</Text>
         </View>
-        <TouchableOpacity style={styles.infoTextContainer}>
-          <Text style={styles.infoAnswer}> Press to show the answer</Text>
+        <TouchableOpacity
+          style={styles.infoTextContainer}
+          onPress={() => setAnswerText(itemData.cardA)}>
+          <Text style={styles.infoAnswer}>{answerText}</Text>
         </TouchableOpacity>
       </View>
     </ScrollView>

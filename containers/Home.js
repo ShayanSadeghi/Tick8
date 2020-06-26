@@ -12,6 +12,7 @@ export default function Home({ navigation }) {
   const db = SQLite.openDatabase("UserDatabase");
   const [cards, setCards] = useState([
     {
+      key: 1,
       cardQ: "Hello and Welcome",
       cardA: "",
       cardEx: "",
@@ -19,8 +20,8 @@ export default function Home({ navigation }) {
   ]);
   const [modalOpen, setModalOpen] = useState(false);
 
-  const onCardPressed = () => {
-    navigation.navigate("CardInfo");
+  const onCardPressed = item => {
+    navigation.navigate("CardInfo", item);
   };
 
   const openNewForm = () => {
@@ -85,7 +86,7 @@ export default function Home({ navigation }) {
         renderItem={({ item }) => (
           <TouchableOpacity
             style={GlobalStyles.card}
-            onPress={() => onCardPressed()}>
+            onPress={() => onCardPressed(item)}>
             <Card data={item} />
           </TouchableOpacity>
         )}
