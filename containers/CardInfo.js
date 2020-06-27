@@ -6,7 +6,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 
 import { DbRemoveData } from "../actions/dbActions";
@@ -15,6 +15,12 @@ export default function CardInfo({ navigation }) {
   const itemData = navigation.state.params;
   const progressLength = (8 - itemData.remainDays) / 10;
   const [answerText, setAnswerText] = useState("Press to show the answer");
+  const [isAnswerShow, setAnswerShow] = useState(false);
+
+  const showAnswer = () => {
+    setAnswerText(itemData.cardA);
+    setAnswerShow(true);
+  };
 
   const removeHandler = () => {
     DbRemoveData(itemData.key);
@@ -42,13 +48,19 @@ export default function CardInfo({ navigation }) {
         <View style={styles.infoTextContainer}>
           <Text style={styles.infoExample}>{itemData.cardEx}</Text>
         </View>
-        <TouchableOpacity
-          style={styles.infoTextContainer}
-          onPress={() => setAnswerText(itemData.cardA)}>
+        <TouchableOpacity style={styles.infoTextContainer} onPress={showAnswer}>
+          {!isAnswerShow && (
+            <MaterialIcons
+              style={styles.eyeIcon}
+              name="remove-red-eye"
+              size={24}
+              color="#FF8A5C"
+            />
+          )}
           <Text style={styles.infoAnswer}>{answerText}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.icon} onPress={removeHandler}>
-          <AntDesign name="delete" color="#FF8A5C" size={24} />
+        <TouchableOpacity style={styles.RemoveIcon} onPress={removeHandler}>
+          <MaterialIcons name="delete" color="#FF8A5C" size={24} />
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -72,6 +84,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   infoTextContainer: {
+    flexDirection: "row",
     width: 300,
     minHeight: 50,
     borderRadius: 10,
@@ -87,9 +100,12 @@ const styles = StyleSheet.create({
   infoAnswer: {
     color: "#00AC9A",
   },
-  icon: {
-    position: "absolute",
-    bottom: 15,
-    left: 15,
+  eyeIcon: {
+    marginRight: 10,
+  },
+  RemoveIcon: {
+    alignSelf: "flex-start",
+    marginTop: 10,
+    marginLeft: 10,
   },
 });

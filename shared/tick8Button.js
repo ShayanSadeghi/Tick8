@@ -1,16 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Tick8Button({ text, pressHandler, icon }) {
   return (
     <TouchableOpacity onPress={pressHandler} style={styles.buttonContainer}>
       <Text style={styles.buttonContent}>{text}</Text>
       {icon && (
-        <AntDesign
+        <MaterialIcons
           name={icon}
           size={24}
-          color="black"
+          color="#FCF9EA"
           style={styles.butttonIcon}
         />
       )}

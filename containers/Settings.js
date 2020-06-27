@@ -7,11 +7,16 @@ import { GlobalStyles } from "../styles/global";
 import { DbRemoveData } from "../actions/dbActions";
 
 export default function Settings({ navigation }) {
+  console.log(navigation);
+  const removeHandler = () => {
+    DbRemoveData();
+    navigation.navigate("Home");
+  };
   const deleteHandler = () => {
     Alert.alert(
       "DELETE CARDS",
       "Are you sure to remove all of your cards history?",
-      [{ text: "Yes", onPress: () => DbRemoveData() }, { text: "Cancel" }],
+      [{ text: "Yes", onPress: removeHandler }, { text: "Cancel" }],
       { cancelable: true }
     );
   };

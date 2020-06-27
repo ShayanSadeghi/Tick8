@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const Header = ({ title, navigation }) => {
   const openMenu = () => {
@@ -8,8 +8,8 @@ const Header = ({ title, navigation }) => {
   };
   return (
     <View style={styles.header}>
-      <AntDesign
-        name="menuunfold"
+      <MaterialIcons
+        name="menu"
         size={30}
         style={styles.headerIcon}
         onPress={openMenu}

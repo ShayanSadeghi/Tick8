@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Card({ data, answerHandler }) {
   return (
@@ -9,20 +9,24 @@ export default function Card({ data, answerHandler }) {
         <Text style={styles.questionText}>{data.cardQ}</Text>
       </View>
       <View style={styles.cardIcons}>
-        <TouchableOpacity onPress={() => answerHandler(false, data)}>
-          <AntDesign
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => answerHandler(false, data)}>
+          <MaterialIcons
             style={styles.icon}
-            name="closecircleo"
+            name="close"
             size={30}
-            color="#FF8A5C"
+            color="#FCF9EA"
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => answerHandler(true, data)}>
-          <AntDesign
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => answerHandler(true, data)}>
+          <MaterialIcons
             style={styles.icon}
-            name="checkcircleo"
+            name="check"
             size={30}
-            color="#FF8A5C"
+            color="#FCF9EA"
           />
         </TouchableOpacity>
       </View>
@@ -44,7 +48,12 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 5,
   },
-  icon: {
-    marginHorizontal: 50,
+  iconContainer: {
+    backgroundColor: "#FF8A5C",
+    width: 30,
+    borderRadius: 20,
+    alignItems: "center",
+    marginHorizontal: 40,
   },
+  icon: {},
 });
