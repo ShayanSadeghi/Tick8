@@ -16,7 +16,7 @@ import { DbSetNewCard, DbUpdateCard } from "../actions/dbActions";
 import { GlobalStyles } from "../styles/global";
 
 export default function Home({ navigation }) {
-  const db = SQLite.openDatabase("UserDatabase");
+  const db = SQLite.openDatabase("DbTick8");
   const [cards, setCards] = useState([
     {
       key: 0,

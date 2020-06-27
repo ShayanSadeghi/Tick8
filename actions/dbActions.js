@@ -1,6 +1,6 @@
 import * as SQLite from "expo-sqlite";
 
-const db = SQLite.openDatabase("UserDatabase");
+const db = SQLite.openDatabase("DbTick8");
 
 //Create Db if it's not exist
 export const DbCreate = () => {
