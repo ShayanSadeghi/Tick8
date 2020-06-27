@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  StyleSheet,
   ActivityIndicator,
   View,
   FlatList,
@@ -79,27 +80,33 @@ export default function Home({ navigation }) {
   }
   return (
     <View style={GlobalStyles.container}>
-      <View style={GlobalStyles.container}>
-        <CardModal
-          visible={modalOpen}
-          setModalOpen={setModalOpen}
-          addCard={addCard}
-        />
+      <CardModal
+        visible={modalOpen}
+        setModalOpen={setModalOpen}
+        addCard={addCard}
+      />
 
-        <FlatList
-          data={cards}
-          keyExtractor={item => item.key.toString()}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={GlobalStyles.card}
-              onPress={() => onCardPressed(item)}>
-              <Card data={item} answerHandler={answerHandler} />
-            </TouchableOpacity>
-          )}
-        />
-
+      <FlatList
+        data={cards}
+        keyExtractor={item => item.key.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={GlobalStyles.card}
+            onPress={() => onCardPressed(item)}>
+            <Card data={item} answerHandler={answerHandler} />
+          </TouchableOpacity>
+        )}
+      />
+      <View style={styles.addButtonContainer}>
         <AddButton onPress={openNewForm} />
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  addButtonContainer: {
+    width: "100%",
+    alignItems: "flex-end",
+  },
+});
