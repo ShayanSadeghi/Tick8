@@ -29,6 +29,7 @@ export default function Home({ navigation }) {
   const [loading, setLoading] = useState(true);
 
   const getData = () => {
+    setLoading(true);
     db.exec(
       [
         {
@@ -46,7 +47,7 @@ export default function Home({ navigation }) {
   };
 
   const onCardPressed = item => {
-    navigation.navigate("CardInfo", item);
+    navigation.navigate("CardInfo", { ...item, getData: () => getData() });
   };
 
   const openNewForm = () => {

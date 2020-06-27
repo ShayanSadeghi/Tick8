@@ -6,13 +6,23 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
 
+import { DbRemoveData } from "../actions/dbActions";
 
 export default function CardInfo({ navigation }) {
   const itemData = navigation.state.params;
   const progressLength = (8 - itemData.remainDays) / 10;
   const [answerText, setAnswerText] = useState("Press to show the answer");
+
+  const removeHandler = () => {
+    DbRemoveData(itemData.key);
+    navigation.navigate("Home", {
+      onGoBack: navigation.state.params.getData(),
+    });
+  };
+
   return (
     <ScrollView style={styles.infoContainer}>
       <View style={styles.infoCard}>
@@ -36,6 +46,9 @@ export default function CardInfo({ navigation }) {
           style={styles.infoTextContainer}
           onPress={() => setAnswerText(itemData.cardA)}>
           <Text style={styles.infoAnswer}>{answerText}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.icon} onPress={removeHandler}>
+          <AntDesign name="delete" color="#FF8A5C" size={24} />
         </TouchableOpacity>
       </View>
     </ScrollView>
@@ -73,5 +86,10 @@ const styles = StyleSheet.create({
   },
   infoAnswer: {
     color: "#00AC9A",
+  },
+  icon: {
+    position: "absolute",
+    bottom: 15,
+    left: 15,
   },
 });

@@ -74,16 +74,29 @@ export const DbUpdateCard = (ans, item) => {
 };
 
 //Delete Table
-export const DbRemoveData = () => {
-  db.exec(
-    [
-      {
-        sql: "DELETE FROM tblUserCards",
-        args: [],
-      },
-    ],
-    false,
-    (tx, res) => {}
-  );
+export const DbRemoveData = (key = null) => {
+  if (key == null) {
+    db.exec(
+      [
+        {
+          sql: "DELETE FROM tblUserCards",
+          args: [],
+        },
+      ],
+      false,
+      (tx, res) => {}
+    );
+  } else {
+    db.exec(
+      [
+        {
+          sql: "DELETE FROM tblUserCards WHERE key=(?)",
+          args: [key],
+        },
+      ],
+      false,
+      (tx, res) => {}
+    );
+  }
 };
 // Get all cards data from database ....
