@@ -9,11 +9,11 @@ const screens = {
   Home: {
     screen: HomeStack,
   },
-  About: {
-    screen: AboutStack,
-  },
   Settings: {
     screen: SettingsStack,
+  },
+  About: {
+    screen: AboutStack,
   },
 };
 
