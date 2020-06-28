@@ -7,10 +7,9 @@ import { GlobalStyles } from "../styles/global";
 import { DbRemoveData } from "../actions/dbActions";
 
 export default function Settings({ navigation }) {
-  console.log(navigation);
   const removeHandler = () => {
     DbRemoveData();
-    navigation.navigate("Home");
+    Alert.alert("Deleted", "Use Refresh button to see the results");
   };
   const deleteHandler = () => {
     Alert.alert(
