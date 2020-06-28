@@ -38,6 +38,7 @@ export default function CardForm({ addCard, setModalOpen }) {
                   onChangeText={props.handleChange("question")}
                   placeholder="Question"
                   style={GlobalStyles.inputText}
+                  onBlur={props.handleBlur("question")}
                 />
                 <Text style={GlobalStyles.errorText}>
                   {props.touched.question && props.errors.question}
@@ -48,9 +49,10 @@ export default function CardForm({ addCard, setModalOpen }) {
                   onChangeText={props.handleChange("answer")}
                   placeholder="Answer"
                   style={GlobalStyles.inputText}
+                  onBlur={props.handleBlur("answer")}
                 />
                 <Text style={GlobalStyles.errorText}>
-                  {props.touched.question && props.errors.answer}
+                  {props.touched.answer && props.errors.answer}
                 </Text>
                 <TextInput
                   multiline
