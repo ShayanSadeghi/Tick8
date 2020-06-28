@@ -7,8 +7,14 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { Formik } from "formik";
+import * as yup from "yup";
 
 import { GlobalStyles } from "../styles/global";
+
+const formSchema = yup.object({
+  question: yup.string().required().min(1),
+  answer: yup.string().required().min(1),
+});
 
 export default function CardForm({ addCard, setModalOpen }) {
   return (
@@ -16,6 +22,7 @@ export default function CardForm({ addCard, setModalOpen }) {
       <ScrollView>
         <Formik
           initialValues={{ question: "", answer: "", example: "" }}
+          validationSchema={formSchema}
           onSubmit={(values, actions) => {
             addCard(values);
             actions.resetForm();
@@ -28,12 +35,19 @@ export default function CardForm({ addCard, setModalOpen }) {
                 placeholder="Question"
                 style={GlobalStyles.inputText}
               />
+              <Text style={GlobalStyles.errorText}>
+                {props.touched.question && props.errors.question}
+              </Text>
+
               <TextInput
                 value={props.values.answer}
                 onChangeText={props.handleChange("answer")}
                 placeholder="Answer"
                 style={GlobalStyles.inputText}
               />
+              <Text style={GlobalStyles.errorText}>
+                {props.touched.question && props.errors.answer}
+              </Text>
               <TextInput
                 multiline
                 minHeight={180}

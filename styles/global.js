@@ -60,8 +60,12 @@ export const GlobalStyles = StyleSheet.create({
     height: 50,
     borderRadius: 10,
     paddingHorizontal: 10,
-    marginVertical: 30,
+    marginTop: 30,
     backgroundColor: "#EFEFEF",
+  },
+  errorText: {
+    color: "#FF8A5C",
+    marginTop: 10,
   },
   modalButtons: {
     bottom: 0,
