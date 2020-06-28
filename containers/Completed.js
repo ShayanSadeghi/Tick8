@@ -71,9 +71,7 @@ export default function Home({ navigation }) {
         data={cards}
         keyExtractor={item => item.key.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            style={GlobalStyles.card}
-            onPress={() => onCardPressed(item)}>
+          <TouchableOpacity style={GlobalStyles.card}>
             <Card data={item} answerHandler={answerHandler} />
           </TouchableOpacity>
         )}

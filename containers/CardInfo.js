@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
@@ -13,7 +14,7 @@ import { DbRemoveData } from "../actions/dbActions";
 
 export default function CardInfo({ navigation }) {
   const itemData = navigation.state.params;
-  const progressLength = (8 - itemData.remainDays) / 10;
+  const progressLength = (8 - itemData.remainDays) / 8;
   const [answerText, setAnswerText] = useState("Press to show the answer");
   const [isAnswerShow, setAnswerShow] = useState(false);
 
@@ -22,6 +23,20 @@ export default function CardInfo({ navigation }) {
     setAnswerShow(true);
   };
 
+  const removeAlert = () => {
+    Alert.alert(
+      "Remove Card",
+      "Are you sure to remove this card?",
+      [
+        {
+          text: "Yes!",
+          onPress: { removeHandler },
+        },
+        { text: "No" },
+      ],
+      { cancelable: true }
+    );
+  };
   const removeHandler = () => {
     DbRemoveData(itemData.key);
     navigation.navigate("Home", {
@@ -46,7 +61,9 @@ export default function CardInfo({ navigation }) {
           style={styles.progressBar}
         />
         <View style={styles.infoTextContainer}>
-          <Text style={styles.infoExample}>{itemData.cardEx}</Text>
+          <Text style={styles.infoExample}>
+            {itemData.cardEx || "No example to show"}
+          </Text>
         </View>
         <TouchableOpacity style={styles.infoTextContainer} onPress={showAnswer}>
           {!isAnswerShow && (
@@ -59,8 +76,8 @@ export default function CardInfo({ navigation }) {
           )}
           <Text style={styles.infoAnswer}>{answerText}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.RemoveIcon} onPress={removeHandler}>
-          <MaterialIcons name="delete" color="#FF8A5C" size={24} />
+        <TouchableOpacity style={styles.RemoveIcon} onPress={removeAlert}>
+          <MaterialIcons name="delete" color="#FF8A5C" size={30} />
         </TouchableOpacity>
       </View>
     </ScrollView>
