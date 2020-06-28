@@ -30,8 +30,6 @@ export const GlobalStyles = StyleSheet.create({
     backgroundColor: "#49BEB7",
     width: 60,
     height: 60,
-    marginBottom: 30,
-    marginRight: 20,
     borderRadius: 30,
     justifyContent: "center",
   },
@@ -42,8 +40,6 @@ export const GlobalStyles = StyleSheet.create({
   refreshBtn: {
     width: 60,
     height: 60,
-    marginBottom: 30,
-    marginRight: 20,
     borderRadius: 30,
     justifyContent: "center",
     borderWidth: 1,
@@ -66,6 +62,7 @@ export const GlobalStyles = StyleSheet.create({
   errorText: {
     color: "#FF8A5C",
     marginTop: 10,
+    fontWeight: "bold",
   },
   modalButtons: {
     bottom: 0,

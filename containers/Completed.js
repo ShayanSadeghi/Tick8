@@ -80,7 +80,7 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         )}
       />
-      <View style={styles.addButtonContainer}>
+      <View style={styles.refreshButtonContainer}>
         <CircleButton
           icon="refresh"
           onPress={getData}
@@ -92,8 +92,9 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  addButtonContainer: {
-    width: "100%",
-    alignItems: "flex-end",
+  refreshButtonContainer: {
+    position: "absolute",
+    bottom: 5,
+    left: 5,
   },
 });
