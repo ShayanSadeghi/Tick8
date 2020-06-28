@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-export default function Card({ data, answerHandler }) {
+export default function Card({ data, answerHandler, resetHandler }) {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.questionContainer}>
@@ -19,16 +19,29 @@ export default function Card({ data, answerHandler }) {
             color="#FCF9EA"
           />
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => answerHandler(true, data)}>
-          <MaterialIcons
-            style={styles.icon}
-            name="check"
-            size={30}
-            color="#FCF9EA"
-          />
-        </TouchableOpacity>
+        {data.remainDays > 0 ? (
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => answerHandler(true, data)}>
+            <MaterialIcons
+              style={styles.icon}
+              name="check"
+              size={30}
+              color="#FCF9EA"
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => resetHandler(data)}>
+            <MaterialIcons
+              style={styles.icon}
+              name="refresh"
+              size={30}
+              color="#FCF9EA"
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -55,5 +68,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 40,
   },
-  icon: {},
 });

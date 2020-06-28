@@ -73,6 +73,20 @@ export const DbUpdateCard = (ans, item) => {
   }
 };
 
+//Reset a card
+export const DbResetCard = item => {
+  db.exec(
+    [
+      {
+        sql: "UPDATE tblUserCards SET remainDays=(?) WHERE key=(?)",
+        args: [8, item.key],
+      },
+    ],
+    false,
+    (tx, res) => {}
+  );
+};
+
 //Delete Table
 export const DbRemoveData = (key = null) => {
   if (key == null) {

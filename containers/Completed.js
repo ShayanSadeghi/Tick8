@@ -9,7 +9,7 @@ import {
 import * as SQLite from "expo-sqlite";
 
 import Card from "../components/card";
-import { DbUpdateCard } from "../actions/dbActions";
+import { DbUpdateCard, DbResetCard } from "../actions/dbActions";
 import CircleButton from "../shared/circleButton";
 
 import { GlobalStyles } from "../styles/global";
@@ -45,12 +45,12 @@ export default function Home({ navigation }) {
     );
   };
 
-  const onCardPressed = item => {
-    navigation.navigate("CardInfo", { ...item, getData: () => getData() });
-  };
-
   const answerHandler = (ans, item) => {
     DbUpdateCard(ans, item);
+    getData();
+  };
+  const resetHandler = item => {
+    DbResetCard(item);
     getData();
   };
 
@@ -72,7 +72,11 @@ export default function Home({ navigation }) {
         keyExtractor={item => item.key.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity style={GlobalStyles.card}>
-            <Card data={item} answerHandler={answerHandler} />
+            <Card
+              data={item}
+              answerHandler={answerHandler}
+              resetHandler={resetHandler}
+            />
           </TouchableOpacity>
         )}
       />
