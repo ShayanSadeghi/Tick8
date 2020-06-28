@@ -35,9 +35,20 @@ export const GlobalStyles = StyleSheet.create({
     borderRadius: 30,
     justifyContent: "center",
   },
-  addBtnContent: {
+  circleBtnContent: {
     color: "#FF8A5C",
     alignSelf: "center",
+  },
+  refreshBtn: {
+    width: 60,
+    height: 60,
+    marginBottom: 30,
+    marginRight: 20,
+    borderRadius: 30,
+    justifyContent: "center",
+    borderWidth: 1,
+    borderStyle: "dashed",
+    borderColor: "#49BEB7",
   },
   modalContainer: {
     backgroundColor: "#FCF9EA",

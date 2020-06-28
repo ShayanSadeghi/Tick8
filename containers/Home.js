@@ -9,7 +9,7 @@ import {
 import * as SQLite from "expo-sqlite";
 
 import Card from "../components/card";
-import AddButton from "../components/addButton";
+import CircleButton from "../shared/circleButton";
 import CardModal from "../containers/cardModal";
 import { DbSetNewCard, DbUpdateCard } from "../actions/dbActions";
 
@@ -40,8 +40,11 @@ export default function Home({ navigation }) {
       ],
       true,
       (tx, res) => {
-        (res[0].rows.length !== 0 && setCards(res[0].rows)) ||
-          setLoading(false);
+        if (res[0].rows.length !== 0) {
+          setCards(res[0].rows);
+        } else {
+          setCards(null);
+        }
         setLoading(false);
       }
     );
@@ -98,7 +101,18 @@ export default function Home({ navigation }) {
         )}
       />
       <View style={styles.addButtonContainer}>
-        <AddButton onPress={openNewForm} />
+        <CircleButton
+          icon="refresh"
+          onPress={getData}
+          style={GlobalStyles.refreshBtn}
+        />
+      </View>
+      <View style={styles.addButtonContainer}>
+        <CircleButton
+          icon="add"
+          onPress={openNewForm}
+          style={GlobalStyles.addBtn}
+        />
       </View>
     </View>
   );

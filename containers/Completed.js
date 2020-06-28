@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  StyleSheet,
   ActivityIndicator,
   View,
   FlatList,
@@ -9,6 +10,7 @@ import * as SQLite from "expo-sqlite";
 
 import Card from "../components/card";
 import { DbUpdateCard } from "../actions/dbActions";
+import CircleButton from "../shared/circleButton";
 
 import { GlobalStyles } from "../styles/global";
 
@@ -76,6 +78,20 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         )}
       />
+      <View style={styles.addButtonContainer}>
+        <CircleButton
+          icon="refresh"
+          onPress={getData}
+          style={GlobalStyles.refreshBtn}
+        />
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  addButtonContainer: {
+    width: "100%",
+    alignItems: "flex-end",
+  },
+});
