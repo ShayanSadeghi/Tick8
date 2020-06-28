@@ -3,6 +3,7 @@ import {
   StyleSheet,
   ActivityIndicator,
   View,
+  ScrollView,
   FlatList,
   TouchableOpacity,
 } from "react-native";
@@ -89,13 +90,15 @@ export default function Home({ navigation }) {
       <FlatList
         data={cards}
         keyExtractor={item => item.key.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={GlobalStyles.card}
-            onPress={() => onCardPressed(item)}>
-            <Card data={item} answerHandler={answerHandler} />
-          </TouchableOpacity>
-        )}
+        renderItem={({ item }) =>
+          item.remainDays > 0 && (
+            <TouchableOpacity
+              style={GlobalStyles.card}
+              onPress={() => onCardPressed(item)}>
+              <Card data={item} answerHandler={answerHandler} />
+            </TouchableOpacity>
+          )
+        }
       />
       <View style={styles.addButtonContainer}>
         <AddButton onPress={openNewForm} />
@@ -108,5 +111,9 @@ const styles = StyleSheet.create({
   addButtonContainer: {
     width: "100%",
     alignItems: "flex-end",
+  },
+  refreshButtonContainer: {
+    width: "100%",
+    alignItems: "flex-start",
   },
 });
