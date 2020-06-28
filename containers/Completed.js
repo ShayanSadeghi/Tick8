@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
   ActivityIndicator,
   View,
   FlatList,
@@ -9,9 +8,7 @@ import {
 import * as SQLite from "expo-sqlite";
 
 import Card from "../components/card";
-import AddButton from "../components/addButton";
-import CardModal from "../containers/cardModal";
-import { DbSetNewCard, DbUpdateCard } from "../actions/dbActions";
+import { DbUpdateCard } from "../actions/dbActions";
 
 import { GlobalStyles } from "../styles/global";
 
@@ -26,7 +23,6 @@ export default function Home({ navigation }) {
       remainDays: 4,
     },
   ]);
-  const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const getData = () => {
@@ -34,14 +30,14 @@ export default function Home({ navigation }) {
     db.exec(
       [
         {
-          sql: "select * from tblUserCards WHERE remainDays>(?)",
+          sql: "select * from tblUserCards WHERE remainDays=(?)",
           args: [0],
         },
       ],
       true,
       (tx, res) => {
-        (res[0].rows.length !== 0 && setCards(res[0].rows)) ||
-          setLoading(false);
+        setCards(res[0].rows);
+
         setLoading(false);
       }
     );
@@ -49,17 +45,6 @@ export default function Home({ navigation }) {
 
   const onCardPressed = item => {
     navigation.navigate("CardInfo", { ...item, getData: () => getData() });
-  };
-
-  const openNewForm = () => {
-    setModalOpen(true);
-  };
-
-  const addCard = values => {
-    DbSetNewCard(values);
-    setLoading(true);
-    getData();
-    setModalOpen(false);
   };
 
   const answerHandler = (ans, item) => {
@@ -80,12 +65,6 @@ export default function Home({ navigation }) {
   }
   return (
     <View style={GlobalStyles.container}>
-      <CardModal
-        visible={modalOpen}
-        setModalOpen={setModalOpen}
-        addCard={addCard}
-      />
-
       <FlatList
         data={cards}
         keyExtractor={item => item.key.toString()}
@@ -97,16 +76,6 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         )}
       />
-      <View style={styles.addButtonContainer}>
-        <AddButton onPress={openNewForm} />
-      </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  addButtonContainer: {
-    width: "100%",
-    alignItems: "flex-end",
-  },
-});

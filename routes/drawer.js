@@ -4,10 +4,14 @@ import { createAppContainer } from "react-navigation";
 import HomeStack from "./homeStack";
 import AboutStack from "./aboutStack";
 import SettingsStack from "./settingsStack";
+import CompletedStack from "./completedStack";
 
 const screens = {
   Home: {
     screen: HomeStack,
+  },
+  "Completed Cards": {
+    screen: CompletedStack,
   },
   Settings: {
     screen: SettingsStack,
