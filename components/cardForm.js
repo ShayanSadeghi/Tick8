@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  StyleSheet,
   View,
   Text,
   TextInput,
@@ -17,6 +18,7 @@ const formSchema = yup.object({
 });
 
 export default function CardForm({ addCard, setModalOpen }) {
+  let formikProps;
   return (
     <View style={GlobalStyles.container}>
       <ScrollView>
@@ -27,51 +29,58 @@ export default function CardForm({ addCard, setModalOpen }) {
             addCard(values);
             actions.resetForm();
           }}>
-          {props => (
-            <View style={GlobalStyles.container}>
-              <TextInput
-                value={props.values.question}
-                onChangeText={props.handleChange("question")}
-                placeholder="Question"
-                style={GlobalStyles.inputText}
-              />
-              <Text style={GlobalStyles.errorText}>
-                {props.touched.question && props.errors.question}
-              </Text>
+          {props => {
+            formikProps = props;
+            return (
+              <View style={GlobalStyles.container}>
+                <TextInput
+                  value={props.values.question}
+                  onChangeText={props.handleChange("question")}
+                  placeholder="Question"
+                  style={GlobalStyles.inputText}
+                />
+                <Text style={GlobalStyles.errorText}>
+                  {props.touched.question && props.errors.question}
+                </Text>
 
-              <TextInput
-                value={props.values.answer}
-                onChangeText={props.handleChange("answer")}
-                placeholder="Answer"
-                style={GlobalStyles.inputText}
-              />
-              <Text style={GlobalStyles.errorText}>
-                {props.touched.question && props.errors.answer}
-              </Text>
-              <TextInput
-                multiline
-                minHeight={180}
-                value={props.values.example}
-                onChangeText={props.handleChange("example")}
-                placeholder="Ex"
-                style={GlobalStyles.inputText}
-              />
-              <View style={GlobalStyles.modalButtons}>
-                <TouchableOpacity
-                  onPress={() => setModalOpen(false)}
-                  style={GlobalStyles.modalButtonClose}>
-                  <Text>Close</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => props.handleSubmit()}
-                  style={GlobalStyles.modalButtonAdd}>
-                  <Text>Add</Text>
-                </TouchableOpacity>
+                <TextInput
+                  value={props.values.answer}
+                  onChangeText={props.handleChange("answer")}
+                  placeholder="Answer"
+                  style={GlobalStyles.inputText}
+                />
+                <Text style={GlobalStyles.errorText}>
+                  {props.touched.question && props.errors.answer}
+                </Text>
+                <TextInput
+                  multiline
+                  minHeight={180}
+                  value={props.values.example}
+                  onChangeText={props.handleChange("example")}
+                  placeholder="Ex"
+                  style={GlobalStyles.inputText}
+                />
               </View>
-            </View>
-          )}
+            );
+          }}
         </Formik>
       </ScrollView>
+      <View style={GlobalStyles.modalButtons}>
+        <TouchableOpacity
+          onPress={() => setModalOpen(false)}
+          style={GlobalStyles.modalButtonClose}>
+          <Text>Close</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => formikProps.handleSubmit()}
+          style={GlobalStyles.modalButtonAdd}>
+          <Text>Add</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  Form: { height: "100%", backgroundColor: "red" },
+});

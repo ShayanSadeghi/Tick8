@@ -69,7 +69,6 @@ export const GlobalStyles = StyleSheet.create({
   },
   modalButtons: {
     bottom: 0,
-    flex: 1,
     flexDirection: "row",
     height: 50,
   },
