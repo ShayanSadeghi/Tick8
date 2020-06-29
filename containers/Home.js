@@ -71,17 +71,28 @@ export default function Home({ navigation }) {
   };
 
   const answerHandler = (ans, item) => {
-    DbUpdateCard(ans, item);
-    getData();
-    if (ans) {
-      setPopup({ show: true, message: "Very Good :)", type: "success" });
-    } else {
+    const now = Date.now();
+    console.log("TIME:", now);
+    if (item.lastEdit + 24 * 60 * 60 * 1000 > now) {
       setPopup({
         show: true,
-        message: "Try harder :(",
-        type: "warning",
+        message: "You should wait between each answer for 24 hour",
+        type: "danger",
       });
+    } else {
+      DbUpdateCard(ans, item);
+      getData();
+      if (ans) {
+        setPopup({ show: true, message: "Very Good :)", type: "success" });
+      } else {
+        setPopup({
+          show: true,
+          message: "Try harder :(",
+          type: "warning",
+        });
+      }
     }
+
     setTimeout(() => {
       setPopup({
         show: false,
@@ -91,6 +102,7 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     getData();
+    console.log("Cards", cards);
   }, []);
 
   if (loading) {

@@ -18,8 +18,9 @@ export const DbCreate = () => {
         db.exec(
           [
             {
-              sql:
-                "CREATE TABLE tblUserCards(key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cardQ VARCHAR(20), cardA VARCHAR(40),cardEx VARCHAR(255), remainDays INTEGER)",
+              sql: `CREATE TABLE tblUserCards
+                (key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, cardQ VARCHAR(20),
+                 cardA VARCHAR(40),cardEx VARCHAR(255), remainDays INTEGER, lastEdit INTEGER)`,
               args: [],
             },
           ],
@@ -33,12 +34,13 @@ export const DbCreate = () => {
 
 //Add a new card to database
 export const DbSetNewCard = values => {
+  const lastEdit = Date.now();
   db.exec(
     [
       {
         sql:
-          "INSERT INTO tblUserCards (cardQ,cardA,cardEx,remainDays) VALUES (?,?,?,?)",
-        args: [values.question, values.answer, values.example, 8],
+          "INSERT INTO tblUserCards (cardQ,cardA,cardEx,remainDays,lastEdit) VALUES (?,?,?,?,?)",
+        args: [values.question, values.answer, values.example, 8, lastEdit],
       },
     ],
     false,
