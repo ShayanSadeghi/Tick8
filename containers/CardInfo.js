@@ -30,7 +30,7 @@ export default function CardInfo({ navigation }) {
       [
         {
           text: "Yes!",
-          onPress: { removeHandler },
+          onPress: () => removeHandler(),
         },
         { text: "No" },
       ],
