@@ -11,6 +11,7 @@ import * as SQLite from "expo-sqlite";
 import Card from "../components/card";
 import CircleButton from "../shared/circleButton";
 import CardModal from "../containers/cardModal";
+import ActionStatus from "../shared/actionStatus";
 import { DbSetNewCard, DbUpdateCard } from "../actions/dbActions";
 
 import { GlobalStyles } from "../styles/global";
@@ -28,7 +29,11 @@ export default function Home({ navigation }) {
   ]);
   const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const [popup, setPopup] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
   const getData = () => {
     setLoading(true);
     db.exec(
@@ -68,6 +73,20 @@ export default function Home({ navigation }) {
   const answerHandler = (ans, item) => {
     DbUpdateCard(ans, item);
     getData();
+    if (ans) {
+      setPopup({ show: true, message: "Very Good :)", type: "success" });
+    } else {
+      setPopup({
+        show: true,
+        message: "Try harder :(",
+        type: "warning",
+      });
+    }
+    setTimeout(() => {
+      setPopup({
+        show: false,
+      });
+    }, 2000);
   };
 
   useEffect(() => {
@@ -88,7 +107,7 @@ export default function Home({ navigation }) {
         setModalOpen={setModalOpen}
         addCard={addCard}
       />
-
+      {popup.show && <ActionStatus popupData={popup} />}
       <FlatList
         data={cards}
         keyExtractor={item => item.key.toString()}

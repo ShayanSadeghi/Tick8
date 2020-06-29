@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-export default function ActionStatus({ message, messageType }) {
-  const boxColor = messageType + "Box";
-  const textColor = messageType + "Text";
+export default function ActionStatus({ popupData }) {
+  const boxColor = popupData.type + "Box";
+  const textColor = popupData.type + "Text";
+
   return (
-    <View style={styles.boxColor}>
-      <Text style={styles.textColor}>{message}</Text>
+    <View style={styles[boxColor]}>
+      <Text style={styles[textColor]}>{popupData.message}</Text>
     </View>
   );
 }
