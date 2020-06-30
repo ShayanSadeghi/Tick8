@@ -96,7 +96,7 @@ export default function Home({ navigation }) {
       setPopup({
         show: false,
       });
-    }, 1600); //300ms for fade in + 300sec for fade out + 1s for fade out timeout
+    }, 2000);
   };
 
   useEffect(() => {
