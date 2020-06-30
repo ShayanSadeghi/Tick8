@@ -72,7 +72,7 @@ export default function Home({ navigation }) {
 
   const answerHandler = (ans, item) => {
     const now = Date.now();
-    if (item.lastEdit + 24 * 60 * 60 * 1000 > now) {
+    if (item.lastEdit + 24 * 60 * 60 * 1000 > now  && item.remainDays !== 8) {
       setPopup({
         show: true,
         message: "You should wait between each answer for 24 hour",
