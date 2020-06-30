@@ -72,7 +72,6 @@ export default function Home({ navigation }) {
 
   const answerHandler = (ans, item) => {
     const now = Date.now();
-    console.log("TIME:", now);
     if (item.lastEdit + 24 * 60 * 60 * 1000 > now) {
       setPopup({
         show: true,
@@ -97,7 +96,7 @@ export default function Home({ navigation }) {
       setPopup({
         show: false,
       });
-    }, 2000);
+    }, 5000);
   };
 
   useEffect(() => {

@@ -1,14 +1,38 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useRef } from "react";
+import { StyleSheet, Animated, View, Text } from "react-native";
+
+const FadeInView = props => {
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+
+  React.useEffect(() => {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 300,
+    }).start();
+  }, []);
+  return (
+    <Animated.View
+      style={{
+        ...props.style,
+        zIndex: 1,
+        justifyContent: "center",
+        opacity: fadeAnim,
+      }}>
+      {props.children}
+    </Animated.View>
+  );
+};
 
 export default function ActionStatus({ popupData }) {
   const boxColor = popupData.type + "Box";
   const textColor = popupData.type + "Text";
 
   return (
-    <View style={styles[boxColor]}>
-      <Text style={styles[textColor]}>{popupData.message}</Text>
-    </View>
+    <FadeInView>
+      <View style={styles[boxColor]}>
+        <Text style={styles[textColor]}>{popupData.message}</Text>
+      </View>
+    </FadeInView>
   );
 }
 
@@ -50,6 +74,7 @@ const styles = StyleSheet.create({
     width: "80%",
     padding: 10,
     position: "absolute",
+    alignSelf: "center",
     top: 10,
     zIndex: 1,
     borderRadius: 15,
