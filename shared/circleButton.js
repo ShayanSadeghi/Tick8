@@ -9,7 +9,7 @@ export default function CircleButton({ onPress, style, icon }) {
     <TouchableOpacity style={style} onPress={onPress}>
       <MaterialIcons
         name={icon}
-        size={48}
+        size={36}
         style={GlobalStyles.circleBtnContent}
       />
     </TouchableOpacity>

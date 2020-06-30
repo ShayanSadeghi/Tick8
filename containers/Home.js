@@ -101,7 +101,6 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     getData();
-    console.log("Cards", cards);
   }, []);
 
   if (loading) {
@@ -130,14 +129,14 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         )}
       />
-      <View style={styles.refreshButtonContainer}>
+      <View style={GlobalStyles.bottomLeftContainer}>
         <CircleButton
           icon="refresh"
           onPress={getData}
           style={GlobalStyles.refreshBtn}
         />
       </View>
-      <View style={styles.addButtonContainer}>
+      <View style={GlobalStyles.bottomRightContainer}>
         <CircleButton
           icon="add"
           onPress={openNewForm}
@@ -147,16 +146,3 @@ export default function Home({ navigation }) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  refreshButtonContainer: {
-    position: "absolute",
-    bottom: 5,
-    left: 5,
-  },
-  addButtonContainer: {
-    position: "absolute",
-    bottom: 5,
-    right: 5,
-  },
-});

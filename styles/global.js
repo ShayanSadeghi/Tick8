@@ -26,10 +26,20 @@ export const GlobalStyles = StyleSheet.create({
     borderRadius: 24,
     minHeight: 70,
   },
+  bottomRightContainer: {
+    position: "absolute",
+    bottom: 10,
+    right: 10,
+  },
+  bottomLeftContainer: {
+    position: "absolute",
+    bottom: 10,
+    left: 10,
+  },
   addBtn: {
     backgroundColor: "#49BEB7",
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     borderRadius: 30,
     justifyContent: "center",
   },
@@ -38,8 +48,8 @@ export const GlobalStyles = StyleSheet.create({
     alignSelf: "center",
   },
   refreshBtn: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     borderRadius: 30,
     justifyContent: "center",
     borderWidth: 1,

@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import { Animated, View, Text } from "react-native";
 
 import { GlobalStyles } from "../styles/global";
-import { Easing } from "react-native-reanimated";
+
 const FadeInView = props => {
   let fadeAnim = useRef(new Animated.Value(0)).current;
 
