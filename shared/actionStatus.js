@@ -2,14 +2,22 @@ import React, { useRef } from "react";
 import { Animated, View, Text } from "react-native";
 
 import { GlobalStyles } from "../styles/global";
+import { Easing } from "react-native-reanimated";
 const FadeInView = props => {
-  const fadeAnim = useRef(new Animated.Value(0)).current;
+  let fadeAnim = useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: 300,
     }).start();
+
+    setTimeout(() => {
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 300,
+      }).start();
+    }, 1000);
   }, []);
   return (
     <Animated.View
