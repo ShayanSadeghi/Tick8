@@ -72,7 +72,7 @@ export default function Home({ navigation }) {
 
   const answerHandler = (ans, item) => {
     const now = Date.now();
-    if (item.lastEdit + 24 * 60 * 60 * 1000 > now && item.remainDays !== 8) {
+    if (item.lastEdit + 24 * 60 * 60 * 1000 > now) {
       setPopup({
         show: true,
         message: "You should wait between each answer for 24 hour",
@@ -91,6 +91,12 @@ export default function Home({ navigation }) {
         });
       }
     }
+
+    setTimeout(() => {
+      setPopup({
+        show: false,
+      });
+    }, 5000);
   };
 
   useEffect(() => {
