@@ -81,4 +81,36 @@ export const GlobalStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  popupBox: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignSelf: "center",
+    position: "absolute",
+    top: 10,
+    zIndex: 1,
+    width: "80%",
+    padding: 10,
+    borderRadius: 15,
+  },
+  popupText: {
+    fontWeight: "bold",
+  },
+  successBox: {
+    backgroundColor: "rgba(40, 167, 69, 0.25)",
+  },
+  successText: {
+    color: "#28A745",
+  },
+  warningBox: {
+    backgroundColor: "rgba(255, 193, 7, 0.25)",
+  },
+  warningText: {
+    color: "#FFC107",
+  },
+  dangerBox: {
+    backgroundColor: "rgba(220, 53, 69, 0.25)",
+  },
+  dangerText: {
+    color: "#DC3545",
+  },
 });
