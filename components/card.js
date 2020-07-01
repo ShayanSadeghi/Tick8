@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  questionText: {},
   cardIcons: {
     flexDirection: "row",
     alignItems: "center",

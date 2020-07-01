@@ -7,19 +7,31 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import * as SQLite from "expo-sqlite";
+
 import { MaterialIcons } from "@expo/vector-icons";
 import * as Progress from "react-native-progress";
+import ActionStatus from "../shared/actionStatus";
 
-import { DbRemoveData } from "../actions/dbActions";
+import { DbRemoveData, DbUpdateCard } from "../actions/dbActions";
 
 import { GlobalStyles } from "../styles/global";
 
 export default function CardInfo({ navigation }) {
-  const itemData = navigation.state.params;
-  const progressLength = (8 - itemData.remainDays) / 8;
+  const db = SQLite.openDatabase("DbTick8");
+
+  const [itemData, getItemData] = useState(navigation.state.params);
+  console.log(itemData);
+  const [progressLength, setProgressLength] = useState(
+    (8 - itemData.remainDays) / 8
+  );
   const [answerText, setAnswerText] = useState("Press to show the answer");
   const [isAnswerShow, setAnswerShow] = useState(false);
-
+  const [popup, setPopup] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
   const showAnswer = () => {
     setAnswerText(itemData.cardA);
     setAnswerShow(true);
@@ -45,10 +57,56 @@ export default function CardInfo({ navigation }) {
       onGoBack: navigation.state.params.getData(),
     });
   };
+  const setAnswer = (ans, item) => {
+    const now = Date.now();
+    if (item.lastEdit + 24 * 60 * 60 * 1000 > now && item.remainDays !== 8) {
+      setPopup({
+        show: true,
+        message: "You should wait between each answer for 24 hour",
+        type: "danger",
+      });
+    } else {
+      DbUpdateCard(ans, item);
+      getData();
+      if (ans) {
+        setPopup({ show: true, message: "Very Good :)", type: "success" });
+        setProgressLength(progressLength + 1 / 8);
+      } else {
+        setPopup({
+          show: true,
+          message: "Try harder :(",
+          type: "warning",
+        });
+        setProgressLength(progressLength - 1 / 8);
+      }
+    }
 
+    setTimeout(() => {
+      setPopup({
+        show: false,
+      });
+    }, 2000);
+  };
+
+  //get card data for updates
+  const getData = () => {
+    db.exec(
+      [
+        {
+          sql: "select * from tblUserCards WHERE key=(?)",
+          args: [itemData.key],
+        },
+      ],
+      true,
+      (tx, res) => {
+        getItemData(res[0].rows[0]);
+      }
+    );
+  };
   return (
     <ScrollView style={styles.infoContainer}>
       <View style={styles.infoCard}>
+        {popup.show && <ActionStatus popupData={popup} />}
         <View style={styles.infoTextContainer}>
           <Text style={GlobalStyles.boldText}>{itemData.cardQ}</Text>
         </View>
@@ -80,9 +138,32 @@ export default function CardInfo({ navigation }) {
             {answerText}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.RemoveIcon} onPress={removeAlert}>
-          <MaterialIcons name="delete" color="#FF8A5C" size={30} />
-        </TouchableOpacity>
+
+        <View style={styles.cardIcons}>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => setAnswer(false, itemData)}>
+            <MaterialIcons
+              style={styles.icon}
+              name="close"
+              size={30}
+              color="#FCF9EA"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconContainer} onPress={removeAlert}>
+            <MaterialIcons name="delete" color="#FCF9EA" size={30} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => setAnswer(true, itemData)}>
+            <MaterialIcons
+              style={styles.icon}
+              name="check"
+              size={30}
+              color="#FCF9EA"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
@@ -99,7 +180,6 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     alignItems: "center",
     backgroundColor: "#BADFDB",
-    paddingBottom: 30,
   },
   progressBar: {
     marginTop: 30,
@@ -121,9 +201,17 @@ const styles = StyleSheet.create({
   eyeIcon: {
     marginRight: 10,
   },
-  RemoveIcon: {
-    alignSelf: "flex-start",
-    marginTop: 10,
-    marginLeft: 10,
+  cardIcons: {
+    flexDirection: "row",
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: 20,
+  },
+  iconContainer: {
+    backgroundColor: "#FF8A5C",
+    width: 30,
+    borderRadius: 20,
+    alignItems: "center",
+    marginHorizontal: 40,
   },
 });
