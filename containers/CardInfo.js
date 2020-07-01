@@ -12,6 +12,8 @@ import * as Progress from "react-native-progress";
 
 import { DbRemoveData } from "../actions/dbActions";
 
+import { GlobalStyles } from "../styles/global";
+
 export default function CardInfo({ navigation }) {
   const itemData = navigation.state.params;
   const progressLength = (8 - itemData.remainDays) / 8;
@@ -48,7 +50,7 @@ export default function CardInfo({ navigation }) {
     <ScrollView style={styles.infoContainer}>
       <View style={styles.infoCard}>
         <View style={styles.infoTextContainer}>
-          <Text style={styles.infoQuestion}>{itemData.cardQ}</Text>
+          <Text style={GlobalStyles.boldText}>{itemData.cardQ}</Text>
         </View>
         <Progress.Bar
           progress={progressLength}
@@ -61,7 +63,7 @@ export default function CardInfo({ navigation }) {
           style={styles.progressBar}
         />
         <View style={styles.infoTextContainer}>
-          <Text style={styles.infoExample}>
+          <Text style={GlobalStyles.regularText}>
             {itemData.cardEx || "No example to show"}
           </Text>
         </View>
@@ -74,7 +76,9 @@ export default function CardInfo({ navigation }) {
               color="#FF8A5C"
             />
           )}
-          <Text style={styles.infoAnswer}>{answerText}</Text>
+          <Text style={[GlobalStyles.regularText, styles.infoAnswer]}>
+            {answerText}
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.RemoveIcon} onPress={removeAlert}>
           <MaterialIcons name="delete" color="#FF8A5C" size={30} />
@@ -110,9 +114,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#EAEAEA",
-  },
-  infoQuestion: {
-    fontWeight: "bold",
   },
   infoAnswer: {
     color: "#00AC9A",

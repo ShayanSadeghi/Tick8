@@ -39,7 +39,12 @@ export default function ActionStatus({ popupData }) {
   return (
     <FadeInView>
       <View style={[GlobalStyles.popupBox, GlobalStyles[boxColor]]}>
-        <Text style={[GlobalStyles.popupText, GlobalStyles[textColor]]}>
+        <Text
+          style={[
+            GlobalStyles.popupText,
+            GlobalStyles[textColor],
+            GlobalStyles.boldText,
+          ]}>
           {popupData.message}
         </Text>
       </View>

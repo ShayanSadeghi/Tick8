@@ -2,6 +2,8 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import { GlobalStyles } from "../styles/global";
+
 const Header = ({ title, navigation }) => {
   const openMenu = () => {
     navigation.openDrawer();
@@ -14,7 +16,7 @@ const Header = ({ title, navigation }) => {
         style={styles.headerIcon}
         onPress={openMenu}
       />
-      <Text style={styles.headerText}>{title}</Text>
+      <Text style={[styles.headerText, GlobalStyles.boldText]}>{title}</Text>
     </View>
   );
 };
@@ -28,7 +30,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   headerText: {
-    fontWeight: "bold",
     fontSize: 20,
     color: "#FF8A5C",
     padding: 10,

@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
   centerText: {
     paddingHorizontal: 10,
     textAlign: "center",
+    fontFamily: "Lato",
     fontSize: 18,
     lineHeight: 30,
   },

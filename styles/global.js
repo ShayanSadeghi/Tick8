@@ -7,6 +7,12 @@ export const GlobalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  regularText: {
+    fontFamily: "Lato",
+  },
+  boldText: {
+    fontFamily: "LatoBold",
+  },
   header: {
     width: "100%",
     height: 70,
@@ -72,7 +78,6 @@ export const GlobalStyles = StyleSheet.create({
   errorText: {
     color: "#FF8A5C",
     marginTop: 10,
-    fontWeight: "bold",
   },
   modalButtons: {
     bottom: 0,

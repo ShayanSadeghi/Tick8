@@ -2,11 +2,15 @@ import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
+import { GlobalStyles } from "../styles/global";
+
 export default function Card({ data, answerHandler, resetHandler }) {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.questionContainer}>
-        <Text style={styles.questionText}>{data.cardQ}</Text>
+        <Text style={[GlobalStyles.regularText, styles.questionText]}>
+          {data.cardQ}
+        </Text>
       </View>
       <View style={styles.cardIcons}>
         <TouchableOpacity

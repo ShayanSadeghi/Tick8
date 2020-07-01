@@ -37,10 +37,10 @@ export default function CardForm({ addCard, setModalOpen }) {
                   value={props.values.question}
                   onChangeText={props.handleChange("question")}
                   placeholder="Question"
-                  style={GlobalStyles.inputText}
+                  style={[GlobalStyles.regularText, GlobalStyles.inputText]}
                   onBlur={props.handleBlur("question")}
                 />
-                <Text style={GlobalStyles.errorText}>
+                <Text style={[GlobalStyles.boldText, GlobalStyles.errorText]}>
                   {props.touched.question && props.errors.question}
                 </Text>
 
@@ -48,10 +48,10 @@ export default function CardForm({ addCard, setModalOpen }) {
                   value={props.values.answer}
                   onChangeText={props.handleChange("answer")}
                   placeholder="Answer"
-                  style={GlobalStyles.inputText}
+                  style={[GlobalStyles.regularText, GlobalStyles.inputText]}
                   onBlur={props.handleBlur("answer")}
                 />
-                <Text style={GlobalStyles.errorText}>
+                <Text style={[GlobalStyles.boldText, GlobalStyles.errorText]}>
                   {props.touched.answer && props.errors.answer}
                 </Text>
                 <TextInput
@@ -60,7 +60,7 @@ export default function CardForm({ addCard, setModalOpen }) {
                   value={props.values.example}
                   onChangeText={props.handleChange("example")}
                   placeholder="Ex"
-                  style={GlobalStyles.inputText}
+                  style={[GlobalStyles.regularText, GlobalStyles.inputText]}
                 />
               </View>
             );
@@ -71,18 +71,14 @@ export default function CardForm({ addCard, setModalOpen }) {
         <TouchableOpacity
           onPress={() => setModalOpen(false)}
           style={GlobalStyles.modalButtonClose}>
-          <Text>Close</Text>
+          <Text style={GlobalStyles.boldText}>Close</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => formikProps.handleSubmit()}
           style={GlobalStyles.modalButtonAdd}>
-          <Text>Add</Text>
+          <Text style={GlobalStyles.boldText}>Add</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  Form: { height: "100%", backgroundColor: "red" },
-});
