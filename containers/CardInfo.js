@@ -21,7 +21,6 @@ export default function CardInfo({ navigation }) {
   const db = SQLite.openDatabase("DbTick8");
 
   const [itemData, getItemData] = useState(navigation.state.params);
-  console.log(itemData);
   const [progressLength, setProgressLength] = useState(
     (8 - itemData.remainDays) / 8
   );
@@ -67,7 +66,8 @@ export default function CardInfo({ navigation }) {
       });
     } else {
       DbUpdateCard(ans, item);
-      getData();
+      getData(); //to update this card
+      navigation.state.params.getData(); // to update cards data in home page
       if (ans) {
         setPopup({ show: true, message: "Very Good :)", type: "success" });
         setProgressLength(progressLength + 1 / 8);
